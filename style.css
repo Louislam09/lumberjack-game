@@ -154,7 +154,7 @@ div .character {
 	background: url(img/character-2.png);
 	width: 270px;
 	height: 405px;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	z-index: 10;
 }
 div .character-shocked {
@@ -164,7 +164,7 @@ div .character-shocked {
 	background: url(img/character-shocked.png);
 	width: 203px;
 	height: 464px;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	z-index: 10;
 }
 
@@ -295,7 +295,15 @@ div .branch {
 .left-side {
 	transform: rotateY(0deg) translate(2%) scale(var(--scale-character));
 }
-
+.autor {
+	position: fixed;
+	bottom: 1%;
+	right: 1%;
+	background-color: rgba(255, 0, 21, 0.678);
+	color: white;
+	padding: 10px;
+	font-weight: bolder;
+}
 @keyframes cut {
 	from {
 		background-position-x: 0px;

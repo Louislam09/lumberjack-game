@@ -288,7 +288,15 @@
 	.left-side {
 		transform: rotateY(0deg) translate(2%) scale(var(--scale-character));
 	}
-
+	.autor {
+		position: fixed;
+		bottom: 1%;
+		right: 1%;
+		background-color: rgba(255, 0, 21, 0.678);
+		color: white;
+		padding: 10px;
+		font-weight: bolder;
+	}
 	@keyframes cut {
 		from {
 			background-position-x: 0px;
