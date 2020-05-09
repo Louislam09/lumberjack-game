@@ -16,6 +16,7 @@ let resultContainer = document.querySelector('.result-container');
 let leftButton = document.querySelector('.left-button');
 let rightButton = document.querySelector('.right-button');
 let restartButton = document.querySelector('.restart-button');
+let playButton = document.querySelector('.play-button');
 
 let scoreDiv = document.querySelector('.score');
 let bestScoreDiv = document.querySelector('.best-score');
@@ -24,7 +25,7 @@ let levelDiv = document.querySelector('.level');
 let resultDiv = document.querySelector('.result');
 
 let branchDir = [ 'branch-left', 'branch-right' ];
-let imgShadow = [ 'url(img/truck1.png)', 'url(img/truck2.png)' ];
+let diferentTrucksImgs = [ 'url(img/truck1.png)', 'url(img/truck2.png)' ];
 
 let trucks = [];
 let character;
@@ -43,6 +44,11 @@ window.addEventListener('load', () => {
 	bestScore = getScore();
 	bestScoreDiv.innerText = `Best score: ${bestScore}🌳`;
 });
+resultContainer.style.visibility = 'hidden';
+itemContainer.style.visibility = 'hidden';
+timeContainer.style.visibility = 'hidden';
+
+playButton.addEventListener('click', gameStart);
 
 function Character() {
 	this.div = document.createElement('div');
@@ -54,7 +60,7 @@ function Character() {
 		if (this.div.classList.contains('right-side')) this.div.classList.remove('right-side');
 		this.div.classList.add('left-side');
 
-		// this allow the character move th axe
+		// this allow the character move the axe
 		this.div.classList.add('cut-left-side');
 		this.div.addEventListener('animationend', () => this.div.classList.remove('cut-left-side'));
 
@@ -81,17 +87,18 @@ function Character() {
 }
 
 function Truck(className) {
-	let randomImg = imgShadow[Math.floor(Math.random() * imgShadow.length)];
-	let potluck = Math.floor(Math.random() * 1.5);
+	let randomTruckImg = diferentTrucksImgs[Math.floor(Math.random() * diferentTrucksImgs.length)];
+	let probabilityToHaveBranch = Math.floor(Math.random() * 1.5);
+
 	this.className = className;
 
 	this.div = document.createElement('div');
 	this.div.classList.add(this.className);
-	this.div.style.background = randomImg;
+	this.div.style.background = randomTruckImg;
 
 	var newBranch = new Branch('branch');
 
-	if (potluck === 0) {
+	if (probabilityToHaveBranch === 0) {
 		this.div.append(newBranch.div);
 	}
 
@@ -107,7 +114,7 @@ function Truck(className) {
 
 		if (timeValue < 90) timeValue += plusTime;
 
-		this.goDown();
+		this.moveTruckDown();
 	};
 
 	this.dropRight = () => {
@@ -120,10 +127,10 @@ function Truck(className) {
 
 		if (timeValue < 90) timeValue += plusTime;
 
-		this.goDown();
+		this.moveTruckDown();
 	};
 
-	this.goDown = () => {
+	this.moveTruckDown = () => {
 		if (this.div.classList.contains('truck')) {
 			trucks.forEach((el, index) => {
 				if (el.div.className === 'truck1') {
@@ -168,6 +175,7 @@ function drawScore() {
 
 function gameStart() {
 	resultContainer.style.visibility = 'hidden';
+	playButton.style.visibility = 'hidden';
 	itemContainer.style.visibility = 'visible';
 	timeContainer.style.visibility = 'visible';
 
@@ -186,7 +194,8 @@ function gameStart() {
 	trucks.push(new Truck('truck2'));
 
 	scoreDiv.innerText = `${score}`;
-	eventHaddler();
+
+	eventHandler();
 }
 
 function gameOver(branch) {
@@ -211,8 +220,10 @@ function gameOver(branch) {
 
 						if (bestScore < score) saveScore(score);
 
-						resultDiv.innerHTML = `You scored: <span style="padding: 10px 100px;">${score}🌳</span> </br></br>
-						<span style="padding: 0px 10px; color:green;"> You best score:</span> <span style="padding: 0px 10px;"> ${getScore()}🌳</span>`;
+						resultDiv.innerHTML = `You scored: <span style="padding: 10px 100px;">${score}🌳</span>
+												</br></br>
+												<span style="padding: 0px 10px; color:green;"> You best score:</span> 
+												<span style="padding: 0px 10px;"> ${getScore()}🌳</span>`;
 					}, 1500);
 				});
 			}
@@ -238,8 +249,10 @@ function gameOver(branch) {
 
 						if (bestScore < score) saveScore(score);
 
-						resultDiv.innerHTML = `You scored: <span style="padding: 10px 100px;">${score}🌳</span> </br></br>
-						<span style="padding: 0px 10px; color:green; "> You best score:</span> <span style="padding: 0px 10px;"> ${getScore()}🌳</span>`;
+						resultDiv.innerHTML = `You scored: <span style="padding: 10px 100px;">${score}🌳</span>
+												</br></br>
+												<span style="padding: 0px 10px; color:green;"> You best score:</span> 
+												<span style="padding: 0px 10px;"> ${getScore()}🌳</span>`;
 					}, 1500);
 				});
 			}
@@ -308,7 +321,7 @@ function timeOut() {
 	}
 }
 
-function eventHaddler() {
+function eventHandler() {
 	document.addEventListener('keydown', (e) => {
 		if (e.keyCode === 37) {
 			character.cutLeft();
@@ -434,5 +447,3 @@ function eventHaddler() {
 		{ once: true }
 	);
 }
-
-gameStart();
