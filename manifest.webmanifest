@@ -1,0 +1,21 @@
+{
+	"short_name": "LumberJack",
+	"name": "LumberJack",
+	"theme_color": "#02132e",
+	"background_color": "#01012a",
+	"description": "A Cool LumberJack Game",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "img/icon2.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "img/icon3.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"start_url": "."
+}

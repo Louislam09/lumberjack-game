@@ -2,11 +2,11 @@ let bestScore;
 
 function saveScore(score) {
 	bestScore = score;
-	localStorage.setItem('bestScore', JSON.stringify(bestScore));
+	localStorage.setItem('best_score', JSON.stringify(bestScore));
 }
 
 function getScore() {
-	let scoreStored = localStorage.getItem('bestScore');
+	let scoreStored = localStorage.getItem('best_score');
 
 	if (scoreStored === null) {
 		scoreStored = 0;

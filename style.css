@@ -23,6 +23,82 @@ body {
 	border: 4px solid lightskyblue;
 	transform: scale(var(--canvas-scale));
 }
+.cloud{
+	position: absolute;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	height: 100px;
+	background: #fff;
+	opacity: 0;
+	border-radius: 50px;
+	z-index: 50;
+}
+.cloud::before{ 
+	position: absolute;
+	top: -50%;
+	left: 20%;
+	content: "";
+	width: 100px;
+	height: 100px;
+	background: #fff;
+	border-radius: 50%;
+	z-index: 50;
+}
+.cloud::after{
+	position: absolute;
+	top: -75%;
+	left: 50%;
+	content: "";
+	width: 120px;
+	height: 120px;
+	background: #fff;
+	border-radius: 50%;
+	z-index: 50;
+} 
+
+.c1{
+	top: 48%;
+	transform: scale(0.5);
+	animation: move-clouds 15s linear infinite;
+	animation-delay: 10s;
+}
+.c2{
+	top: 23%;
+	left: 10%;
+	animation: move-clouds 15s linear infinite;
+	animation-delay: 8s;
+}
+.c3{
+	top: 35%;
+	transform: scale(0.8);
+	animation: move-clouds 15s linear infinite;
+}
+
+@keyframes move-clouds{
+	0%{
+		left: 60%;
+		opacity: .9;
+	}
+	100%{
+		opacity: 0;
+		left: 30%;
+		
+	}
+}
+
+.main-menu .play-button {
+		background-color: transparent;
+		border-radius: 50px;
+		margin: 120px 40px;
+		padding: 20px 100px;
+		color: green;
+		z-index: 11;
+	}
+.main-menu .play-button:hover {
+	transition: .5s;
+	border: 15px solid green;
+	filter: brightness(100) hue-rotate(30deg);
+}
 .time-container {
 	position: absolute;
 	bottom: 120%;

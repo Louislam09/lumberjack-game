@@ -24,8 +24,8 @@ let timeValueDiv = document.querySelector('.time-value');
 let levelDiv = document.querySelector('.level');
 let resultDiv = document.querySelector('.result');
 
-let branchDir = [ 'branch-left', 'branch-right' ];
-let diferentTrucksImgs = [ 'url(img/truck1.png)', 'url(img/truck2.png)' ];
+let branchDir = ['branch-left', 'branch-right'];
+let diferentTrucksImgs = ['url(img/truck1.png)', 'url(img/truck2.png)'];
 
 let trucks = [];
 let character;
@@ -41,9 +41,11 @@ let plusTime = 5;
 let minusTime = 1;
 
 window.addEventListener('load', () => {
+	registerSW();
 	bestScore = getScore();
 	bestScoreDiv.innerText = `Best score: ${bestScore}🌳`;
 });
+
 resultContainer.style.visibility = 'hidden';
 itemContainer.style.visibility = 'hidden';
 timeContainer.style.visibility = 'hidden';
@@ -447,3 +449,14 @@ function eventHandler() {
 		{ once: true }
 	);
 }
+
+async function registerSW() {
+	if ("serviceWorker" in navigator) {
+		try {
+			await navigator.serviceWorker.register("./sw.js");
+		} catch (error) {
+			console.log("ServiceWorker registration failed")
+		}
+	}
+}
+
